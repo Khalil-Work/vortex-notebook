@@ -4,14 +4,19 @@ The notebook is the executable guide for this repository: markdown
 derivations plus live computations of every verification case. Regenerate
 after editing with:
 
-    python examples/build_notebook.py --execute
+    python examples/build_notebook.py --execute            # portable kernel
+    python examples/build_notebook.py --execute --kernel engineering-python
+
+The default kernel is the portable ``python3`` kernelspec that any normal
+``pip install ipykernel`` environment provides; ``--kernel`` overrides it
+for environments with a differently named kernel. Execution runs with the
+repository root as the working directory.
 """
 
 from __future__ import annotations
 
 import argparse
 import pathlib
-import subprocess
 import sys
 
 import nbformat as nbf
@@ -27,12 +32,13 @@ def md(src):
     return nbf.v4.new_markdown_cell(src)
 
 
-def build():
+def build(kernel: str = "python3"):
     nb = nbf.v4.new_notebook()
+    display = {"python3": "Python 3 (ipykernel)"}.get(kernel, kernel)
     nb.metadata.kernelspec = {
-        "display_name": "Engineering Python",
+        "display_name": display,
         "language": "python",
-        "name": "engineering-python",
+        "name": kernel,
     }
     nb.metadata.language_info = {"name": "python"}
 
@@ -42,16 +48,18 @@ def build():
             "\n"
             "This notebook drives the tested `spectral_flow` package: it derives the\n"
             "method, runs the Taylor–Green verification case against the analytic\n"
-            "solution, measures the RK4 time-convergence order, evolves a nonlinear\n"
-            "cascade, and displays the recorded vorticity animation. Every number and\n"
-            "figure below is computed when the notebook runs.\n"
+            "solution, measures the RK4 time-convergence order, and evolves a nonlinear\n"
+            "cascade. The plots in the code cells are computed live when the notebook\n"
+            "runs; the closing animation is loaded from the higher-resolution recorded\n"
+            "run produced by `examples/run_verification.py` (not re-computed here).\n"
             "\n"
             "Run from the repository root with the dependencies from\n"
-            "`requirements-dev.txt` installed:\n"
+            "`requirements-dev.txt` installed (any environment with an `ipykernel`\n"
+            "`python3` kernel works):\n"
             "\n"
             "```bash\n"
-            "python -m jupyter nbconvert --to notebook --execute --inplace \\\n"
-            "    docs/vortex_notebook.ipynb\n"
+            "python -m ipykernel install --user --name python3  # if no kernel yet\n"
+            "python examples/build_notebook.py --execute\n"
             "```\n"
             "\n"
             "Static export of the executed copy committed here is rendered directly\n"
@@ -285,26 +293,32 @@ def build():
     return out
 
 
-def execute(path):
+def execute(path, kernel):
     import nbformat
     from nbclient import NotebookClient
 
     nb = nbformat.read(str(path), as_version=4)
-    client = NotebookClient(nb, timeout=600, kernel_name="engineering-python")
-    try:
-        client.execute()
-    except Exception:
-        client = NotebookClient(nb, timeout=600)
-        client.execute()
+    client = NotebookClient(
+        nb,
+        timeout=600,
+        kernel_name=kernel,
+        resources={"metadata": {"path": str(ROOT)}},
+    )
+    client.execute()  # real execution errors propagate
     nbformat.write(nb, str(path))
-    print("executed in place")
+    print(f"executed in place with kernel {kernel!r}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--execute", action="store_true")
+    parser.add_argument(
+        "--kernel",
+        default="python3",
+        help="Jupyter kernel name (default: portable 'python3')",
+    )
     args = parser.parse_args()
-    path = build()
+    path = build(args.kernel)
     if args.execute:
-        execute(path)
+        execute(path, args.kernel)
         print("executed in place")
