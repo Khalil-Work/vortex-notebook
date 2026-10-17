@@ -23,5 +23,9 @@
     "grid": 128,
     "viscosity": 0.0005,
     "t_end": 8.0
+  },
+  "animation": {
+    "file": "vorticity_evolution.gif",
+    "frames": 41
   }
 }

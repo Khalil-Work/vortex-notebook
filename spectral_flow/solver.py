@@ -13,7 +13,7 @@ vorticity-streamfunction form read
     \\frac{\\partial\\omega}{\\partial t}
         + \\nabla\\cdot(\\mathbf{u}\\,\\omega) = \\nu\\nabla^2\\omega,
     \\qquad
-    \\hat{\\psi} = -\\frac{\\hat{\\omega}}{k^2}\\ (k\\neq 0),\\quad
+    \\hat{\\psi} = \\frac{\\hat{\\omega}}{k^2}\\ (k\\neq 0),\\quad
     \\hat{\\psi}(0)=0,
 
 .. math::
@@ -31,6 +31,11 @@ two retained modes can only fold back onto a retained mode if their true sum
 also lies there, because :math:`2(N/3 - 1) - N < -(N/3)`. The scheme is thus
 an exact Galerkin integration of the Navier-Stokes equations restricted to
 that band. Time stepping is classical four-stage Runge-Kutta (RK4).
+
+When ``dealias=True``, ``step_rk4`` and ``nonlinear_hat`` expect band-limited
+spectral input (all modes outside the retained band zero);
+``integrate`` guarantees this by projecting the initial field and every
+step result. Hand-assembled states should apply ``dealias_mask`` first.
 
 The Poisson relation :math:`\\omega=-\\nabla^2\\psi` is inverted in Fourier
 space as :math:`\\hat{\\psi}=\\hat{\\omega}/k^2`. The streamfunction zero
