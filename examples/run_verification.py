@@ -188,7 +188,7 @@ def make_cover(solver, x, diag, fields, conv):
     gs = fig.add_gridspec(2, 3, height_ratios=(1.15, 1.0), hspace=0.38, wspace=0.32)
 
     ax0 = fig.add_subplot(gs[0, 0])
-    pm = ax0.pcolormesh(x, x, w0_field.T, cmap="RdBu_r", shading="nearest")
+    pm = ax0.pcolormesh(x, x, w0_field.T, cmap="RdBu_r", shading="nearest", rasterized=True)
     ax0.set_title(r"$\omega$ at $t=0$ s")
     ax0.set_aspect("equal")
     ax0.set_xlabel("x [m]")
@@ -196,7 +196,7 @@ def make_cover(solver, x, diag, fields, conv):
     fig.colorbar(pm, ax=ax0, label=r"$\omega$ [1/s]")
 
     ax1 = fig.add_subplot(gs[0, 1])
-    pm = ax1.pcolormesh(x, x, wT_field.T, cmap="RdBu_r", shading="nearest")
+    pm = ax1.pcolormesh(x, x, wT_field.T, cmap="RdBu_r", shading="nearest", rasterized=True)
     ax1.set_title(r"$\omega$ at $t=2$ s, $\nu=0.01$")
     ax1.set_aspect("equal")
     ax1.set_xlabel("x [m]")
@@ -204,7 +204,7 @@ def make_cover(solver, x, diag, fields, conv):
     fig.colorbar(pm, ax=ax1, label=r"$\omega$ [1/s]")
 
     ax2 = fig.add_subplot(gs[0, 2])
-    pm = ax2.pcolormesh(x, x, err_field.T, cmap="magma", shading="nearest")
+    pm = ax2.pcolormesh(x, x, err_field.T, cmap="magma", shading="nearest", rasterized=True)
     ax2.set_title(f"velocity error at t = 2 s\nmax = {err_field.max():.2e} m/s")
     ax2.set_aspect("equal")
     ax2.set_xlabel("x [m]")
@@ -245,7 +245,7 @@ def make_cover(solver, x, diag, fields, conv):
         fontsize=13,
     )
     fig.savefig(RESULTS / "taylor_green_verification.png", dpi=150, bbox_inches="tight")
-    fig.savefig(RESULTS / "taylor_green_verification.svg", bbox_inches="tight")
+    fig.savefig(RESULTS / "taylor_green_verification.svg", dpi=180, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -253,7 +253,7 @@ def make_cascade_figure(solver, x, hist, snaps, spectra):
     t, E, Z = hist
     fig, ax = plt.subplots(2, 3, figsize=(13.4, 8.4))
     for a, w, tt in zip(ax[0], snaps, ("0", "4", "8")):
-        pm = a.pcolormesh(x, x, w.T, cmap="RdBu_r", shading="nearest")
+        pm = a.pcolormesh(x, x, w.T, cmap="RdBu_r", shading="nearest", rasterized=True)
         a.set_aspect("equal")
         a.set_title(f"ω at t = {tt} s")
         a.set_xlabel("x [m]")
@@ -282,7 +282,7 @@ def make_cascade_figure(solver, x, hist, snaps, spectra):
     fig.suptitle("Nonlinear cascade demonstration — computed run, no external reference", fontsize=13)
     fig.tight_layout()
     fig.savefig(RESULTS / "nonlinear_cascade.png", dpi=150, bbox_inches="tight")
-    fig.savefig(RESULTS / "nonlinear_cascade.svg", bbox_inches="tight")
+    fig.savefig(RESULTS / "nonlinear_cascade.svg", dpi=180, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -317,7 +317,7 @@ def make_preview(diag, fields, conv, x):
     dts, errors, orders = conv
 
     fig, ax = plt.subplots(1, 3, figsize=(12.8, 6.4))
-    pm = ax[0].pcolormesh(x, x, wT_field.T, cmap="RdBu_r", shading="nearest")
+    pm = ax[0].pcolormesh(x, x, wT_field.T, cmap="RdBu_r", shading="nearest", rasterized=True)
     ax[0].set_aspect("equal")
     ax[0].set_title("Computed vorticity ω at t = 2 s")
     ax[0].set_xlabel("x [m]")
