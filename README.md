@@ -1,6 +1,6 @@
 # 🌀 Vortex Notebook
 
-**An executable guide to periodic vortex dynamics: an original 2D incompressible Navier–Stokes spectral solver — strictly de-aliased vorticity–streamfunction formulation with RK4 — delivered as a tested Python package plus a fully executed Jupyter notebook, and verified to the roundoff floor against the analytic Taylor–Green vortex.**
+**An executable guide to periodic vortex dynamics: an original 2D incompressible Navier–Stokes spectral solver (strictly de-aliased vorticity–streamfunction formulation, RK4) whose Taylor–Green benchmark error sits at the floating-point roundoff floor and whose nonlinear operator matches an independent 3/2-rule padded reference to 1e-12 — delivered as a tested Python package plus an executed Jupyter notebook.**
 
 [![tests](https://github.com/khalil-official/vortex-notebook/actions/workflows/ci.yml/badge.svg)](https://github.com/khalil-official/vortex-notebook/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -21,9 +21,9 @@ what the solver produced.</sub>
 
 ## 🎯 Purpose and scope
 
-A compact, readable, fully verified spectral solver for the periodic 2D
-Navier–Stokes equations, packaged as `spectral_flow` (tested module) and
-explored interactively in **[docs/vortex_notebook.ipynb](docs/vortex_notebook.ipynb)**
+A compact, readable spectral solver for the periodic 2D Navier–Stokes
+equations, packaged as `spectral_flow` (tested module) and explored
+interactively in **[docs/vortex_notebook.ipynb](docs/vortex_notebook.ipynb)**
 — an executed notebook containing the derivations, every verification case,
 and the parameter playground. Physical scope: single-phase, constant
 property, incompressible 2D flow on [0, 2π)². Not a turbulence modeling
@@ -53,11 +53,15 @@ python -m pip install -r requirements-dev.txt   # numpy, matplotlib, pillow, pyt
 python -m pytest tests -q                       # 12 verification tests
 python examples/run_verification.py             # figures + animation + raw data
 python examples/build_notebook.py --execute     # rebuild + re-execute the notebook
+python -m jupyterlab docs/vortex_notebook.ipynb # open interactively
 ```
 
-Verified runtimes: Python 3.13.5, NumPy 2.1.3, Matplotlib 3.10.0, Windows 11
-(CI runs the test suite on Ubuntu). Typical cost: tests ≈ 6 s; the full
-results script ≈ 1 min at N=128; the notebook ≈ 2 min.
+The notebook builder uses the portable `python3` kernel by default
+(`--kernel NAME` overrides; `ipykernel` is included in
+`requirements-dev.txt`). Verified runtimes: Python 3.13.5, NumPy 2.1.3,
+Matplotlib 3.10.0, Windows 11 (CI runs the test suite on Ubuntu). Typical
+cost: tests ≈ 6 s; the full results script ≈ 1 min at N=128; the notebook
+≈ 2 min.
 
 ## 🧱 Architecture and API
 
@@ -73,9 +77,14 @@ examples/                    # run_verification.py, build_notebook.py
 ```
 
 ```python
+import numpy as np
 from spectral_flow import SpectralVorticitySolver, taylor_green_vorticity
 
-solver = SpectralVorticitySolver(n=128, viscosity=0.01)   # domain [0, 2π)²
+x = np.arange(128) * (2 * np.pi / 128)          # grid on [0, 2π)²
+xx, yy = np.meshgrid(x, x, indexing="ij")
+w0 = taylor_green_vorticity(xx, yy)             # initial vorticity field
+
+solver = SpectralVorticitySolver(n=128, viscosity=0.01)
 history = solver.integrate(w0, dt=0.001, nsteps=2000, sample_every=100)
 for t, w_hat in history:
     print(t, solver.energy(w_hat), solver.enstrophy(w_hat))

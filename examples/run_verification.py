@@ -189,7 +189,7 @@ def make_cover(solver, x, diag, fields, conv):
 
     ax0 = fig.add_subplot(gs[0, 0])
     pm = ax0.pcolormesh(x, x, w0_field.T, cmap="RdBu_r", shading="nearest")
-    ax0.set_title(r"Vorticity $\omega$ at $t=0$ s (Taylor-Green)")
+    ax0.set_title(r"$\omega$ at $t=0$ s")
     ax0.set_aspect("equal")
     ax0.set_xlabel("x [m]")
     ax0.set_ylabel("y [m]")
@@ -197,7 +197,7 @@ def make_cover(solver, x, diag, fields, conv):
 
     ax1 = fig.add_subplot(gs[0, 1])
     pm = ax1.pcolormesh(x, x, wT_field.T, cmap="RdBu_r", shading="nearest")
-    ax1.set_title(r"Vorticity $\omega$ at $t=2$ s ($\nu=0.01$ m$^2$/s)")
+    ax1.set_title(r"$\omega$ at $t=2$ s, $\nu=0.01$")
     ax1.set_aspect("equal")
     ax1.set_xlabel("x [m]")
     ax1.set_ylabel("y [m]")
@@ -205,7 +205,7 @@ def make_cover(solver, x, diag, fields, conv):
 
     ax2 = fig.add_subplot(gs[0, 2])
     pm = ax2.pcolormesh(x, x, err_field.T, cmap="magma", shading="nearest")
-    ax2.set_title(f"Velocity error |u_num - u_exact|\nmax = {err_field.max():.2e} m/s")
+    ax2.set_title(f"velocity error at t = 2 s\nmax = {err_field.max():.2e} m/s")
     ax2.set_aspect("equal")
     ax2.set_xlabel("x [m]")
     ax2.set_ylabel("y [m]")
