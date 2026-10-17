@@ -151,3 +151,8 @@ turbulence-statistics validation is claimed.
 Dependencies: NumPy (BSD-3), Matplotlib (PSF-based), Pillow (HPND),
 pytest/nbclient/Jupyter (own licenses) — see `requirements*.txt`. This
 repository's own code is original and MIT-licensed; see [LICENSE](LICENSE).
+
+
+---
+
+Calendar metadata: [reconstructed date records](docs/CALENDAR_HISTORY.md) were generated on 18 October 2026. Their historical author dates are synthetic; they do not date the software development. Original source commits and actual committer dates are preserved.
