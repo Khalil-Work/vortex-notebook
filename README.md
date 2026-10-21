@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/banner.svg" alt="Vortex Notebook banner: centered spiral vortex emblem in indigo with the solver equation" width="100%">
+<img src="docs/banner.png" alt="Vortex Notebook banner: centered spiral vortex emblem in indigo with the solver equation" width="100%">
 
 # 🌀 Vortex Notebook
 
@@ -70,9 +70,9 @@ flowchart LR
     A[band-limited ω̂] --> B[ψ̂ = ω̂/k², k ≠ 0]
     B --> C[û = i k_y ψ̂, v̂ = −i k_x ψ̂ → physical u, ω]
     C --> D[u ω product in physical space]
-    D --> E[F[u ω] → strict band projection]
-    E --> F[dω̂/dt = −i k·F[u ω] − ν k² ω̂]
-    F --> G[RK4 combine → ω̂(t+dt)]
+    D --> E["F[u ω] → strict band projection"]
+    E --> F["dω̂/dt = −i k·F[u ω] − ν k² ω̂"]
+    F --> G["RK4 combine → ω̂(t+dt)"]
     G --> A
 ```
 
