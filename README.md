@@ -12,14 +12,14 @@ the floating-point roundoff floor and whose nonlinear operator matches an indepe
 3/2-rule padded reference to 1e-12 — delivered as a tested Python package plus an
 executed Jupyter notebook.**
 
-[![tests](https://github.com/khalil-official/vortex-notebook/actions/workflows/ci.yml/badge.svg)](https://github.com/khalil-official/vortex-notebook/actions/workflows/ci.yml)
+[![tests](https://github.com/khalil-work/vortex-notebook/actions/workflows/ci.yml/badge.svg)](https://github.com/khalil-work/vortex-notebook/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![python](https://img.shields.io/badge/python-3.12%20%7C%203.13-blue.svg)](requirements.txt)
 [![tests](https://img.shields.io/badge/tests-12%20passing-brightgreen.svg)](tests)
 [![notebook](https://img.shields.io/badge/notebook-executed-orange.svg)](docs/vortex_notebook.ipynb)
 [![TG error](https://img.shields.io/badge/Taylor--Green%20error-3.9e--16-red.svg)](docs/verification.md)
-[![repo stars](https://img.shields.io/github/stars/khalil-official/vortex-notebook?style=flat&color=yellow)](https://github.com/khalil-official/vortex-notebook/stargazers)
-[![last commit](https://img.shields.io/github/last-commit/khalil-official/vortex-notebook?color=9cf)](https://github.com/khalil-official/vortex-notebook/commits)
+[![repo stars](https://img.shields.io/github/stars/khalil-work/vortex-notebook?style=flat&color=yellow)](https://github.com/khalil-work/vortex-notebook/stargazers)
+[![last commit](https://img.shields.io/github/last-commit/khalil-work/vortex-notebook?color=9cf)](https://github.com/khalil-work/vortex-notebook/commits)
 
 [Open the notebook](docs/vortex_notebook.ipynb) · [Quick start](#-quick-start) · [Method](#-model-method-and-stability) · [Animation](#%EF%B8%8F-results-gallery) · [References](#-references)
 
