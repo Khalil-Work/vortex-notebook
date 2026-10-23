@@ -21,7 +21,7 @@ executed Jupyter notebook.**
 [![repo stars](https://img.shields.io/github/stars/khalil-work/vortex-notebook?style=flat&color=yellow)](https://github.com/khalil-work/vortex-notebook/stargazers)
 [![last commit](https://img.shields.io/github/last-commit/khalil-work/vortex-notebook?color=9cf)](https://github.com/khalil-work/vortex-notebook/commits)
 
-[Open the notebook](docs/vortex_notebook.ipynb) · [Quick start](#-quick-start) · [Method](#-model-method-and-stability) · [Animation](#%EF%B8%8F-results-gallery) · [References](#-references)
+[Open the notebook](docs/vortex_notebook.ipynb) · [Homepage](https://khalil-work.github.io) · [Quick start](#-quick-start) · [Method](#-model-method-and-stability) · [Animation](#%EF%B8%8F-results-gallery) · [References](#-references)
 
 </div>
 
