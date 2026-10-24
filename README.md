@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/banner.png" alt="Vortex Notebook banner: centered spiral vortex emblem in indigo with the solver equation" width="100%">
+<img src="docs/banner.gif" alt="Vortex Notebook banner: centered spiral vortex emblem in indigo with the solver equation" width="100%">
 
 # 🌀 Vortex Notebook
 
